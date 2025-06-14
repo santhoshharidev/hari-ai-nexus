@@ -10,7 +10,6 @@ import CursorFollowingRobot from '@/components/CursorFollowingRobot';
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
-  const aboutRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -29,7 +28,7 @@ const Index = () => {
       });
     }, observerOptions);
 
-    const sections = [heroRef, aboutRef, projectsRef, servicesRef, contactRef];
+    const sections = [heroRef, projectsRef, servicesRef, contactRef];
     sections.forEach((ref) => {
       if (ref.current) observer.observe(ref.current);
     });
@@ -89,94 +88,65 @@ const Index = () => {
       <MagicalCursor />
       <CursorFollowingRobot />
       <FloatingNav 
-        onNavigate={(section) => scrollToSection(
-          section === 'hero' ? heroRef :
-          section === 'about' ? aboutRef :
-          section === 'projects' ? projectsRef :
-          section === 'services' ? servicesRef : contactRef
-        )}
+        onNavigate={(section) => {
+          if (section === 'hero') scrollToSection(heroRef);
+          else if (section === 'about') scrollToSection(heroRef); // redirect about to hero since we removed about section
+          else if (section === 'projects') scrollToSection(projectsRef);
+          else if (section === 'services') scrollToSection(servicesRef);
+          else scrollToSection(contactRef);
+        }}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Similar to reference image */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="text-center">
-            <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-                <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent animate-pulse">
-                  SANTHOSH
-                </span>
-                <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mt-2">
-                  HARI
-                </span>
-              </h1>
-            </div>
-            
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent" style={{ animationDelay: '0.4s' }}>
-              Web Developer & AI Agent Builder
-            </h2>
-            
-            <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in leading-relaxed" style={{ animationDelay: '0.6s' }}>
-              Crafting intelligent interfaces and automations for the future
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-              <Button 
-                onClick={() => scrollToSection(projectsRef)}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-              >
-                See My Projects
-              </Button>
-              <Button 
-                variant="outline" 
-                onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
-                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-              >
-                <Github className="mr-2 h-5 w-5" />
-                View My GitHub
-              </Button>
-            </div>
-          </div>
-          
-          <div className="text-center mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
-            <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer mx-auto" onClick={() => scrollToSection(aboutRef)} />
-          </div>
-        </div>
-      </section>
-
-      {/* About Section with Photo */}
-      <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Text Content */}
-            <div className="space-y-6">
-              <div className="mb-8">
-                <h3 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
-                  SANTHOSH HARI
-                </h3>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Name and Description */}
+            <div className="space-y-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <div>
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+                  <span className="block text-white">Hi, I'm</span>
+                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
+                    SANTHOSH HARI
+                  </span>
+                </h1>
+                
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-light mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                  Web Developer & AI Agent Builder
+                </h2>
+                
+                <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl">
+                  I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. I craft beautiful, functional web experiences while building intelligent automation systems.
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {['React', 'TypeScript', 'Node.js', 'Python', 'AI/ML', 'OpenAI'].map((skill) => (
+                    <span key={skill} className="px-4 py-2 bg-gray-800/50 backdrop-blur-sm rounded-full text-sm font-medium border border-gray-700 hover:border-blue-400 transition-colors">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
               </div>
               
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. My expertise lies in crafting beautiful, functional web experiences while building intelligent automation systems.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                From responsive web applications to sophisticated AI workflows, I bring ideas to life with clean code, innovative solutions, and a deep understanding of both user experience and business needs.
-              </p>
-              <div className="flex flex-wrap gap-3 mt-8">
-                {['React', 'TypeScript', 'Node.js', 'Python', 'AI/ML', 'OpenAI', 'Automation', 'UI/UX'].map((skill) => (
-                  <span key={skill} className="px-4 py-2 bg-gray-800/50 backdrop-blur-sm rounded-full text-sm font-medium border border-gray-700 hover:border-blue-400 transition-colors">
-                    {skill}
-                  </span>
-                ))}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  onClick={() => scrollToSection(projectsRef)}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  View My Work
+                </Button>
+                <Button 
+                  onClick={() => scrollToSection(contactRef)}
+                  variant="outline" 
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                >
+                  Let's Connect
+                </Button>
               </div>
             </div>
             
-            {/* Right Side - Your Photo */}
-            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+            {/* Right Side - Photo */}
+            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
               <div className="relative group">
                 {/* Glowing background effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
@@ -196,6 +166,11 @@ const Index = () => {
                 </div>
               </div>
             </div>
+          </div>
+          
+          {/* Scroll indicator */}
+          <div className="text-center mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+            <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer mx-auto" onClick={() => scrollToSection(projectsRef)} />
           </div>
         </div>
       </section>

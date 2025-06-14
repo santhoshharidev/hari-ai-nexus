@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Home, User, Briefcase, Settings, Mail } from 'lucide-react';
+import { User, Briefcase, Settings, Mail } from 'lucide-react';
 
 interface FloatingNavProps {
   onNavigate: (section: 'hero' | 'about' | 'projects' | 'services' | 'contact') => void;
@@ -29,7 +29,6 @@ const FloatingNav = ({ onNavigate }: FloatingNavProps) => {
   }, [lastScrollY]);
 
   const navItems = [
-    { id: 'hero', icon: Home, label: 'Home' },
     { id: 'about', icon: User, label: 'About' },
     { id: 'projects', icon: Briefcase, label: 'Projects' },
     { id: 'services', icon: Settings, label: 'Services' },

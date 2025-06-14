@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -90,14 +91,14 @@ const Index = () => {
       <FloatingNav 
         onNavigate={(section) => {
           if (section === 'hero') scrollToSection(heroRef);
-          else if (section === 'about') scrollToSection(heroRef); // redirect about to hero since we removed about section
+          else if (section === 'about') scrollToSection(heroRef);
           else if (section === 'projects') scrollToSection(projectsRef);
           else if (section === 'services') scrollToSection(servicesRef);
           else scrollToSection(contactRef);
         }}
       />
 
-      {/* Hero Section - Similar to reference image */}
+      {/* Hero Section */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -105,18 +106,17 @@ const Index = () => {
             <div className="space-y-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div>
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                  <span className="block text-white">Hi, I'm</span>
                   <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
                     SANTHOSH HARI
                   </span>
                 </h1>
                 
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-light mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                  Web Developer & AI Agent Builder
+                  Hi, I am a Web Developer & AI Agent Builder
                 </h2>
                 
                 <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl">
-                  I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. I craft beautiful, functional web experiences while building intelligent automation systems.
+                  I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. I craft beautiful, functional web experiences while building intelligent automation systems that streamline business processes and enhance productivity.
                 </p>
                 
                 <div className="flex flex-wrap gap-3 mb-8">
@@ -207,7 +207,7 @@ const Index = () => {
           
           <div className="text-center">
             <Button 
-              onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
+              onClick={() => window.open('https://github.com/santhoshharidev', '_blank')}
               className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <ExternalLink className="mr-2 h-5 w-5" />

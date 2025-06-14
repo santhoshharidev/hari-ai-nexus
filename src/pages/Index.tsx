@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -101,66 +100,41 @@ const Index = () => {
       {/* Hero Section */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - Text Content */}
-            <div className="text-left lg:text-left">
-              <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-                <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent animate-pulse">
-                    SANTHOSH
-                  </span>
-                  <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mt-2">
-                    HARI
-                  </span>
-                </h1>
-              </div>
-              
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent" style={{ animationDelay: '0.4s' }}>
-                Web Developer & AI Agent Builder
-              </h2>
-              
-              <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-2xl opacity-0 animate-fade-in leading-relaxed" style={{ animationDelay: '0.6s' }}>
-                Crafting intelligent interfaces and automations for the future
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-                <Button 
-                  onClick={() => scrollToSection(projectsRef)}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  See My Projects
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
-                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-                >
-                  <Github className="mr-2 h-5 w-5" />
-                  View My GitHub
-                </Button>
-              </div>
+          <div className="text-center">
+            <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent animate-pulse">
+                  SANTHOSH
+                </span>
+                <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mt-2">
+                  HARI
+                </span>
+              </h1>
             </div>
-
-            {/* Right Side - Image */}
-            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
-              <div className="relative group">
-                {/* Glowing background effect */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
-                
-                {/* Main image container */}
-                <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-2 border border-gray-700/50">
-                  <img 
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                    alt="Santhosh Hari - Web Developer & AI Agent Builder"
-                    className="w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
-                  />
-                  
-                  {/* Floating elements */}
-                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-bounce opacity-80"></div>
-                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-500 rounded-full animate-pulse opacity-80"></div>
-                  <div className="absolute top-1/4 -left-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-60"></div>
-                </div>
-              </div>
+            
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent" style={{ animationDelay: '0.4s' }}>
+              Web Developer & AI Agent Builder
+            </h2>
+            
+            <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in leading-relaxed" style={{ animationDelay: '0.6s' }}>
+              Crafting intelligent interfaces and automations for the future
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+              <Button 
+                onClick={() => scrollToSection(projectsRef)}
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              >
+                See My Projects
+              </Button>
+              <Button 
+                variant="outline" 
+                onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
+                className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+              >
+                <Github className="mr-2 h-5 w-5" />
+                View My GitHub
+              </Button>
             </div>
           </div>
           
@@ -170,7 +144,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
+      {/* About Section with Photo */}
       <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
@@ -178,7 +152,14 @@ const Index = () => {
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text Content */}
             <div className="space-y-6">
+              <div className="mb-8">
+                <h3 className="text-3xl sm:text-4xl font-bold mb-6 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
+                  SANTHOSH HARI
+                </h3>
+              </div>
+              
               <p className="text-lg text-gray-300 leading-relaxed">
                 I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. My expertise lies in crafting beautiful, functional web experiences while building intelligent automation systems.
               </p>
@@ -194,9 +175,25 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="relative">
-              <div className="w-full h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl backdrop-blur-sm border border-gray-700 flex items-center justify-center">
-                <Code className="h-24 w-24 text-blue-400" />
+            {/* Right Side - Your Photo */}
+            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+              <div className="relative group">
+                {/* Glowing background effect */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                
+                {/* Main image container */}
+                <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-2 border border-gray-700/50">
+                  <img 
+                    src="/lovable-uploads/6306526b-9949-4fa7-8be0-5b7466535601.png"
+                    alt="Santhosh Hari - Web Developer & AI Agent Builder"
+                    className="w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Floating elements */}
+                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-bounce opacity-80"></div>
+                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-500 rounded-full animate-pulse opacity-80"></div>
+                  <div className="absolute top-1/4 -left-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-60"></div>
+                </div>
               </div>
             </div>
           </div>

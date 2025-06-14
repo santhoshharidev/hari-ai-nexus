@@ -6,35 +6,30 @@ const MagicalCursor = () => {
   const trailRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const smoothPosition = useRef({ x: 0, y: 0 });
-  const animationId = useRef<number>();
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+      
+      // Move cursor instantly
+      if (cursorRef.current) {
+        cursorRef.current.style.left = `${e.clientX - 10}px`;
+        cursorRef.current.style.top = `${e.clientY - 10}px`;
+      }
+      
+      // Trail follows with slight delay
+      if (trailRef.current) {
+        setTimeout(() => {
+          if (trailRef.current) {
+            trailRef.current.style.left = `${e.clientX - 20}px`;
+            trailRef.current.style.top = `${e.clientY - 20}px`;
+          }
+        }, 50);
+      }
     };
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
-
-    // Smooth cursor animation
-    const animateCursor = () => {
-      if (cursorRef.current && trailRef.current) {
-        // Smooth interpolation for main cursor
-        smoothPosition.current.x += (mousePosition.x - smoothPosition.current.x) * 0.15;
-        smoothPosition.current.y += (mousePosition.y - smoothPosition.current.y) * 0.15;
-
-        cursorRef.current.style.transform = `translate(${smoothPosition.current.x - 10}px, ${smoothPosition.current.y - 10}px)`;
-        
-        // Trail follows with more delay
-        const trailX = smoothPosition.current.x + (mousePosition.x - smoothPosition.current.x) * 0.05;
-        const trailY = smoothPosition.current.y + (mousePosition.y - smoothPosition.current.y) * 0.05;
-        
-        trailRef.current.style.transform = `translate(${trailX - 20}px, ${trailY - 20}px)`;
-      }
-      
-      animationId.current = requestAnimationFrame(animateCursor);
-    };
 
     // Add event listeners for interactive elements
     const interactiveElements = document.querySelectorAll('button, a, [role="button"]');
@@ -44,25 +39,24 @@ const MagicalCursor = () => {
     });
 
     window.addEventListener('mousemove', updateMousePosition);
-    animationId.current = requestAnimationFrame(animateCursor);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
-      if (animationId.current) {
-        cancelAnimationFrame(animationId.current);
-      }
       interactiveElements.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, [mousePosition.x, mousePosition.y]);
+  }, []);
 
   return (
     <>
-      {/* Hide default cursor */}
+      {/* Hide default cursor completely */}
       <style>{`
-        * {
+        *, *::before, *::after {
+          cursor: none !important;
+        }
+        body, html {
           cursor: none !important;
         }
       `}</style>
@@ -70,7 +64,7 @@ const MagicalCursor = () => {
       {/* Cursor trail */}
       <div
         ref={trailRef}
-        className={`fixed pointer-events-none z-[9999] transition-all duration-300 ${
+        className={`fixed pointer-events-none z-[9999] transition-all duration-200 ${
           isHovering ? 'scale-150' : 'scale-100'
         }`}
         style={{
@@ -82,10 +76,10 @@ const MagicalCursor = () => {
         }}
       />
       
-      {/* Main cursor */}
+      {/* Main cursor - moves instantly */}
       <div
         ref={cursorRef}
-        className={`fixed pointer-events-none z-[10000] transition-all duration-200 ${
+        className={`fixed pointer-events-none z-[10000] transition-transform duration-100 ${
           isHovering ? 'scale-125' : 'scale-100'
         }`}
         style={{

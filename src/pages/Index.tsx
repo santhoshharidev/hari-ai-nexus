@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ParticleBackground from '@/components/ParticleBackground';
 import FloatingNav from '@/components/FloatingNav';
-import ChatBot from '@/components/ChatBot';
 import MagicalCursor from '@/components/MagicalCursor';
 import CursorFollowingRobot from '@/components/CursorFollowingRobot';
 
@@ -345,8 +344,6 @@ const Index = () => {
           </p>
         </div>
       </footer>
-
-      <ChatBot />
     </div>
   );
 };

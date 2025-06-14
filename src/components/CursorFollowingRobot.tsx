@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -93,22 +92,25 @@ const CursorFollowingRobot = () => {
       
       const robotRect = robotRef.current.getBoundingClientRect();
       const robotCenterX = robotRect.left + robotRect.width / 2;
-      const robotCenterY = robotRect.top + robotRect.height / 2 - 15; // Adjust for head position
+      const robotCenterY = robotRect.top + 40; // Adjusted for head center position
       
       const deltaX = mousePosition.x - robotCenterX;
       const deltaY = mousePosition.y - robotCenterY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       
       if (distance > 0) {
-        // Improved eye tracking with proper constraints
-        const maxDistance = 8; // Maximum eye movement from center
-        const normalizedX = (deltaX / window.innerWidth) * maxDistance;
-        const normalizedY = (deltaY / window.innerHeight) * maxDistance;
+        // Improved smooth eye tracking with direct cursor following
+        const maxEyeDistance = 6; // Maximum distance eyes can move from center
+        const angle = Math.atan2(deltaY, deltaX);
         
-        // Smooth interpolation for natural movement
+        // Calculate the target position based on cursor direction
+        const targetX = Math.cos(angle) * Math.min(distance / 100, maxEyeDistance);
+        const targetY = Math.sin(angle) * Math.min(distance / 100, maxEyeDistance);
+        
+        // Much smoother interpolation for natural movement
         setEyePosition(prev => ({
-          x: prev.x + (normalizedX - prev.x) * 0.1,
-          y: prev.y + (normalizedY - prev.y) * 0.1
+          x: prev.x + (targetX - prev.x) * 0.15, // Increased interpolation factor for more responsiveness
+          y: prev.y + (targetY - prev.y) * 0.15
         }));
       }
     };
@@ -119,8 +121,8 @@ const CursorFollowingRobot = () => {
       setTimeout(() => setIsBlinking(false), 150);
     }, 3000);
 
-    // Eye tracking
-    const trackingInterval = setInterval(updateEyePosition, 16); // 60fps
+    // Smoother eye tracking with higher frame rate
+    const trackingInterval = setInterval(updateEyePosition, 8); // Increased to ~120fps for smoother movement
 
     window.addEventListener('mousemove', updateMousePosition);
 
@@ -174,40 +176,40 @@ const CursorFollowingRobot = () => {
                 {/* Eyes */}
                 <div className="flex justify-center items-center space-x-4 pt-4">
                   {/* Left Eye */}
-                  <div className="relative w-6 h-6 overflow-hidden">
+                  <div className="relative w-6 h-6 bg-slate-700 rounded-full overflow-hidden">
                     {!isBlinking ? (
                       <div 
-                        className="absolute w-5 h-5 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75"
+                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75 ease-out"
                         style={{
-                          left: `${2 + eyePosition.x}px`,
-                          top: `${2 + eyePosition.y}px`,
-                          boxShadow: '0 0 10px rgba(34, 211, 238, 0.8)',
+                          left: `${4 + eyePosition.x}px`,
+                          top: `${4 + eyePosition.y}px`,
+                          boxShadow: '0 0 8px rgba(34, 211, 238, 0.8)',
                         }}
                       >
                         {/* Eye highlight */}
-                        <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                        <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full opacity-90"></div>
                       </div>
                     ) : (
-                      <div className="w-5 h-1 bg-cyan-500 rounded-full mt-2.5 ml-0.5"></div>
+                      <div className="w-4 h-0.5 bg-cyan-500 rounded-full mt-3 ml-1"></div>
                     )}
                   </div>
                   
                   {/* Right Eye */}
-                  <div className="relative w-6 h-6 overflow-hidden">
+                  <div className="relative w-6 h-6 bg-slate-700 rounded-full overflow-hidden">
                     {!isBlinking ? (
                       <div 
-                        className="absolute w-5 h-5 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75"
+                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75 ease-out"
                         style={{
-                          left: `${2 + eyePosition.x}px`,
-                          top: `${2 + eyePosition.y}px`,
-                          boxShadow: '0 0 10px rgba(34, 211, 238, 0.8)',
+                          left: `${4 + eyePosition.x}px`,
+                          top: `${4 + eyePosition.y}px`,
+                          boxShadow: '0 0 8px rgba(34, 211, 238, 0.8)',
                         }}
                       >
                         {/* Eye highlight */}
-                        <div className="absolute top-1 left-1 w-1.5 h-1.5 bg-white rounded-full opacity-80"></div>
+                        <div className="absolute top-0.5 left-0.5 w-1 h-1 bg-white rounded-full opacity-90"></div>
                       </div>
                     ) : (
-                      <div className="w-5 h-1 bg-cyan-500 rounded-full mt-2.5 ml-0.5"></div>
+                      <div className="w-4 h-0.5 bg-cyan-500 rounded-full mt-3 ml-1"></div>
                     )}
                   </div>
                 </div>

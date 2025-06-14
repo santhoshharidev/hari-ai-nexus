@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import ParticleBackground from '@/components/ParticleBackground';
 import FloatingNav from '@/components/FloatingNav';
 import ChatBot from '@/components/ChatBot';
+import MagicalCursor from '@/components/MagicalCursor';
+import CursorFollowingRobot from '@/components/CursorFollowingRobot';
 
 const Index = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -85,6 +87,8 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-x-hidden">
       <ParticleBackground />
+      <MagicalCursor />
+      <CursorFollowingRobot />
       <FloatingNav 
         onNavigate={(section) => scrollToSection(
           section === 'hero' ? heroRef :
@@ -96,48 +100,72 @@ const Index = () => {
 
       {/* Hero Section */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl">
-              <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center text-4xl font-bold bg-gradient-to-br from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                SH
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text Content */}
+            <div className="text-left lg:text-left">
+              <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent animate-pulse">
+                    SANTHOSH
+                  </span>
+                  <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-400 bg-clip-text text-transparent mt-2">
+                    HARI
+                  </span>
+                </h1>
+              </div>
+              
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent" style={{ animationDelay: '0.4s' }}>
+                Web Developer & AI Agent Builder
+              </h2>
+              
+              <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-2xl opacity-0 animate-fade-in leading-relaxed" style={{ animationDelay: '0.6s' }}>
+                Crafting intelligent interfaces and automations for the future
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+                <Button 
+                  onClick={() => scrollToSection(projectsRef)}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  See My Projects
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                >
+                  <Github className="mr-2 h-5 w-5" />
+                  View My GitHub
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Side - Image */}
+            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+              <div className="relative group">
+                {/* Glowing background effect */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+                
+                {/* Main image container */}
+                <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-2 border border-gray-700/50">
+                  <img 
+                    src="/lovable-uploads/6306526b-9949-4fa7-8be0-5b7466535601.png"
+                    alt="Santhosh Hari - Web Developer & AI Agent Builder"
+                    className="w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Floating elements */}
+                  <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-bounce opacity-80"></div>
+                  <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-500 rounded-full animate-pulse opacity-80"></div>
+                  <div className="absolute top-1/4 -left-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-60"></div>
+                </div>
               </div>
             </div>
           </div>
           
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
-              Santhosh Hari
-            </span>
-          </h1>
-          
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
-            Web Developer & AI Agent Builder
-          </h2>
-          
-          <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            Crafting intelligent interfaces and automations for the future
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
-            <Button 
-              onClick={() => scrollToSection(projectsRef)}
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-            >
-              See My Projects
-            </Button>
-            <Button 
-              variant="outline" 
-              onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
-              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-            >
-              <Github className="mr-2 h-5 w-5" />
-              View My GitHub
-            </Button>
-          </div>
-          
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
-            <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer" onClick={() => scrollToSection(aboutRef)} />
+          <div className="text-center mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+            <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer mx-auto" onClick={() => scrollToSection(aboutRef)} />
           </div>
         </div>
       </section>

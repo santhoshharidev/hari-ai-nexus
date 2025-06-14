@@ -1,4 +1,5 @@
 
+
 import { useEffect, useRef, useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -234,11 +235,45 @@ const CursorFollowingRobot = () => {
           <div className="absolute top-8 -left-4 w-3 h-16 bg-gradient-to-b from-gray-200 to-gray-300 rounded-full shadow-lg border border-gray-400"></div>
           <div className="absolute top-8 -right-4 w-3 h-16 bg-gradient-to-b from-gray-200 to-gray-300 rounded-full shadow-lg border border-gray-400"></div>
           
-          {/* Hover message */}
+          {/* Cloud-like speech bubble on left side */}
           {isHovered && (
-            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 opacity-100 transition-opacity duration-300">
-              <div className="bg-gray-900/95 text-white text-sm px-4 py-2 rounded-full whitespace-nowrap backdrop-blur-sm border border-cyan-400/50 shadow-lg">
-                <span className="mr-2">🤖</span>Hi! I'm AI Assistant
+            <div className="absolute top-1/2 -left-48 transform -translate-y-1/2 opacity-100 transition-all duration-300 ease-out animate-fade-in z-10">
+              {/* Speech bubble container */}
+              <div className="relative">
+                {/* Main cloud bubble */}
+                <div className="bg-white/95 backdrop-blur-sm rounded-3xl px-6 py-4 shadow-2xl border-2 border-cyan-200/50 relative">
+                  {/* Cloud-like decorative circles */}
+                  <div className="absolute -top-2 left-4 w-6 h-6 bg-white/90 rounded-full shadow-lg"></div>
+                  <div className="absolute -top-1 left-8 w-4 h-4 bg-white/80 rounded-full shadow-md"></div>
+                  <div className="absolute -top-0.5 left-11 w-3 h-3 bg-white/70 rounded-full shadow-sm"></div>
+                  
+                  {/* Message content */}
+                  <div className="flex items-center space-x-3 relative z-10">
+                    <div className="text-2xl animate-bounce">🤖</div>
+                    <div>
+                      <p className="text-gray-800 font-medium text-sm whitespace-nowrap">
+                        Hi! I'm AI Assistant
+                      </p>
+                      <p className="text-gray-600 text-xs mt-1">
+                        Click to chat with me
+                      </p>
+                    </div>
+                  </div>
+                  
+                  {/* Speech bubble tail pointing to robot */}
+                  <div className="absolute top-1/2 -right-3 transform -translate-y-1/2">
+                    <div className="w-0 h-0 border-l-[12px] border-l-white/95 border-t-[8px] border-t-transparent border-b-[8px] border-b-transparent"></div>
+                    <div className="absolute top-1/2 -right-0.5 transform -translate-y-1/2 w-0 h-0 border-l-[10px] border-l-cyan-200/50 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent"></div>
+                  </div>
+                  
+                  {/* Subtle glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-100/30 to-blue-100/30 rounded-3xl -z-10 blur-sm"></div>
+                </div>
+                
+                {/* Floating sparkles around the bubble */}
+                <div className="absolute -top-4 -left-2 w-1 h-1 bg-cyan-400 rounded-full animate-ping opacity-60"></div>
+                <div className="absolute -bottom-3 left-2 w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse opacity-50"></div>
+                <div className="absolute top-2 -right-3 w-1 h-1 bg-purple-400 rounded-full animate-bounce opacity-70"></div>
               </div>
             </div>
           )}

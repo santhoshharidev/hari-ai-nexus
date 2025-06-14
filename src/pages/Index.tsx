@@ -1,12 +1,308 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useEffect, useRef } from 'react';
+import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import ParticleBackground from '@/components/ParticleBackground';
+import FloatingNav from '@/components/FloatingNav';
+import ChatBot from '@/components/ChatBot';
 
 const Index = () => {
+  const heroRef = useRef<HTMLElement>(null);
+  const aboutRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const servicesRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-fade-in');
+        }
+      });
+    }, observerOptions);
+
+    const sections = [heroRef, aboutRef, projectsRef, servicesRef, contactRef];
+    sections.forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (ref: React.RefObject<HTMLElement>) => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const projects = [
+    {
+      title: "AI-Powered E-commerce Platform",
+      description: "Full-stack e-commerce solution with intelligent product recommendations",
+      tech: ["React", "Node.js", "AI/ML", "MongoDB"],
+      gradient: "from-blue-600 to-purple-600"
+    },
+    {
+      title: "Smart Workflow Automation",
+      description: "Custom AI agents for automating business processes and workflows",
+      tech: ["Python", "OpenAI", "Automation", "APIs"],
+      gradient: "from-teal-600 to-blue-600"
+    },
+    {
+      title: "Interactive Dashboard Suite",
+      description: "Real-time analytics dashboard with dynamic data visualization",
+      tech: ["React", "TypeScript", "D3.js", "WebSocket"],
+      gradient: "from-purple-600 to-pink-600"
+    }
+  ];
+
+  const services = [
+    {
+      icon: Globe,
+      title: "Custom Web Development",
+      description: "Modern, responsive websites and web applications tailored to your needs",
+      color: "text-blue-400"
+    },
+    {
+      icon: Bot,
+      title: "AI Agent Integration",
+      description: "Intelligent automation solutions that streamline your business processes",
+      color: "text-purple-400"
+    },
+    {
+      icon: Zap,
+      title: "Workflow Automation",
+      description: "Custom scripts and tools to optimize your daily operations and productivity",
+      color: "text-teal-400"
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-x-hidden">
+      <ParticleBackground />
+      <FloatingNav 
+        onNavigate={(section) => scrollToSection(
+          section === 'hero' ? heroRef :
+          section === 'about' ? aboutRef :
+          section === 'projects' ? projectsRef :
+          section === 'services' ? servicesRef : contactRef
+        )}
+      />
+
+      {/* Hero Section */}
+      <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="w-32 h-32 mx-auto mb-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1 shadow-2xl">
+              <div className="w-full h-full rounded-full bg-gray-800 flex items-center justify-center text-4xl font-bold bg-gradient-to-br from-blue-400 to-purple-600 bg-clip-text text-transparent">
+                SH
+              </div>
+            </div>
+          </div>
+          
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in" style={{ animationDelay: '0.4s' }}>
+            <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
+              Santhosh Hari
+            </span>
+          </h1>
+          
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light mb-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            Web Developer & AI Agent Builder
+          </h2>
+          
+          <p className="text-xl sm:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            Crafting intelligent interfaces and automations for the future
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+            <Button 
+              onClick={() => scrollToSection(projectsRef)}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              See My Projects
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
+              className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            >
+              <Github className="mr-2 h-5 w-5" />
+              View My GitHub
+            </Button>
+          </div>
+          
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 animate-fade-in" style={{ animationDelay: '1.2s' }}>
+            <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer" onClick={() => scrollToSection(aboutRef)} />
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section ref={aboutRef} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            About Me
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <p className="text-lg text-gray-300 leading-relaxed">
+                I'm a passionate Web Developer and AI Agent Builder with a vision to bridge the gap between cutting-edge technology and human creativity. My expertise lies in crafting beautiful, functional web experiences while building intelligent automation systems.
+              </p>
+              <p className="text-lg text-gray-300 leading-relaxed">
+                From responsive web applications to sophisticated AI workflows, I bring ideas to life with clean code, innovative solutions, and a deep understanding of both user experience and business needs.
+              </p>
+              <div className="flex flex-wrap gap-3 mt-8">
+                {['React', 'TypeScript', 'Node.js', 'Python', 'AI/ML', 'OpenAI', 'Automation', 'UI/UX'].map((skill) => (
+                  <span key={skill} className="px-4 py-2 bg-gray-800/50 backdrop-blur-sm rounded-full text-sm font-medium border border-gray-700 hover:border-blue-400 transition-colors">
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            <div className="relative">
+              <div className="w-full h-80 bg-gradient-to-br from-blue-600/20 to-purple-600/20 rounded-2xl backdrop-blur-sm border border-gray-700 flex items-center justify-center">
+                <Code className="h-24 w-24 text-blue-400" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section ref={projectsRef} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            Featured Projects
+          </h2>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {projects.map((project, index) => (
+              <Card key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 hover:border-blue-400 transition-all duration-300 hover:transform hover:scale-105 group">
+                <CardContent className="p-6">
+                  <div className={`h-2 w-full bg-gradient-to-r ${project.gradient} rounded-full mb-4`}></div>
+                  <h3 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4 leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech) => (
+                      <span key={tech} className="px-3 py-1 bg-gray-700 rounded-full text-xs font-medium text-gray-300">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center">
+            <Button 
+              onClick={() => window.open('https://github.com/santhoshhari', '_blank')}
+              className="bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <ExternalLink className="mr-2 h-5 w-5" />
+              See All on GitHub
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section ref={servicesRef} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            Services
+          </h2>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 hover:border-blue-400 transition-all duration-300 hover:transform hover:scale-105 group">
+                <CardContent className="p-8 text-center">
+                  <service.icon className={`h-16 w-16 ${service.color} mx-auto mb-6 group-hover:scale-110 transition-transform`} />
+                  <h3 className="text-xl font-bold mb-4 group-hover:text-blue-400 transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-gray-400 leading-relaxed">
+                    {service.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section ref={contactRef} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            Let's Connect
+          </h2>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <Button 
+              onClick={() => window.open('https://www.linkedin.com/in/santhoshhari16', '_blank')}
+              className="bg-blue-600 hover:bg-blue-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Linkedin className="mr-3 h-6 w-6" />
+              LinkedIn
+            </Button>
+            
+            <Button 
+              onClick={() => window.open('https://www.instagram.com/_santhosh.hari_?igsh=dGpqNmgwanBvZHF5', '_blank')}
+              className="bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <Instagram className="mr-3 h-6 w-6" />
+              Instagram
+            </Button>
+            
+            <Button 
+              onClick={() => window.open('https://x.com/SanthoshHa55695', '_blank')}
+              className="bg-gray-800 hover:bg-gray-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 border border-gray-600"
+            >
+              <Twitter className="mr-3 h-6 w-6" />
+              X (Twitter)
+            </Button>
+            
+            <Button 
+              onClick={() => window.open('https://www.fiverr.com/santhosh_hari_', '_blank')}
+              className="bg-green-600 hover:bg-green-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+            >
+              <ExternalLink className="mr-3 h-6 w-6" />
+              Fiverr Profile
+            </Button>
+            
+            <Button 
+              onClick={() => window.open('mailto:santhoshhari.tech@gmail.com', '_blank')}
+              className="bg-red-600 hover:bg-red-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 sm:col-span-2 lg:col-span-1"
+            >
+              <Mail className="mr-3 h-6 w-6" />
+              Email Me
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-gray-400">
+            © 2024 Santhosh Hari. Made with <span className="text-red-500">❤️</span> by Santhosh Hari
+          </p>
+        </div>
+      </footer>
+
+      <ChatBot />
     </div>
   );
 };

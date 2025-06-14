@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -111,9 +112,17 @@ const Index = () => {
             {/* Left Side - Name and Description */}
             <div className="space-y-8">
               <div>
+                {/* Decorative top border */}
+                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 rounded-full mb-8"></div>
+                
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
-                    SANTHOSH HARI
+                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent relative">
+                    <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-50 animate-pulse">
+                      SANTHOSH HARI
+                    </span>
+                    <span className="relative drop-shadow-2xl">
+                      SANTHOSH HARI
+                    </span>
                   </span>
                 </h1>
                 
@@ -132,28 +141,6 @@ const Index = () => {
                     </span>
                   ))}
                 </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  onClick={() => {
-                    console.log('View My Work clicked');
-                    scrollToSection(projectsRef);
-                  }}
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
-                >
-                  View My Work
-                </Button>
-                <Button 
-                  onClick={() => {
-                    console.log('Let\'s Connect clicked');
-                    scrollToSection(contactRef);
-                  }}
-                  variant="outline" 
-                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
-                >
-                  Let's Connect
-                </Button>
               </div>
             </div>
             
@@ -178,6 +165,29 @@ const Index = () => {
                   <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-gradient-to-r from-teal-400 to-blue-500 rounded-full animate-pulse opacity-80"></div>
                   <div className="absolute top-1/4 -left-6 w-4 h-4 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full animate-ping opacity-60"></div>
                 </div>
+              </div>
+              
+              {/* Buttons below image */}
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 justify-center">
+                <Button 
+                  onClick={() => {
+                    console.log('View My Work clicked');
+                    scrollToSection(projectsRef);
+                  }}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+                >
+                  View My Work
+                </Button>
+                <Button 
+                  onClick={() => {
+                    console.log('Let\'s Connect clicked');
+                    scrollToSection(contactRef);
+                  }}
+                  variant="outline" 
+                  className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
+                >
+                  Let's Connect
+                </Button>
               </div>
             </div>
           </div>

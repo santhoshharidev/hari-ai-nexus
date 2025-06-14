@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -202,8 +201,15 @@ const Index = () => {
       {/* Projects Section */}
       <section ref={projectsRef} className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            Featured Projects
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 relative">
+            {/* Glow effect background layer */}
+            <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-60 animate-pulse">
+              Featured Projects
+            </span>
+            {/* Main sharp text layer */}
+            <span className="relative bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent drop-shadow-2xl">
+              Featured Projects
+            </span>
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -244,8 +250,15 @@ const Index = () => {
       {/* Services Section */}
       <section ref={servicesRef} className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            Services
+          <h2 className="text-4xl sm:text-5xl font-bold text-center mb-16 relative">
+            {/* Glow effect background layer */}
+            <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-60 animate-pulse">
+              Services
+            </span>
+            {/* Main sharp text layer */}
+            <span className="relative bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent drop-shadow-2xl">
+              Services
+            </span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -269,8 +282,15 @@ const Index = () => {
       {/* Contact Section */}
       <section ref={contactRef} className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-16 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-            Let's Connect
+          <h2 className="text-4xl sm:text-5xl font-bold mb-16 relative">
+            {/* Glow effect background layer */}
+            <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-60 animate-pulse">
+              Let's Connect
+            </span>
+            {/* Main sharp text layer */}
+            <span className="relative bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent drop-shadow-2xl">
+              Let's Connect
+            </span>
           </h2>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

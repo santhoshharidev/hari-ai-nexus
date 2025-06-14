@@ -105,7 +105,7 @@ const Index = () => {
         }}
       />
 
-      {/* Hero Section - This should be visible immediately */}
+      {/* Hero Section */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -115,14 +115,14 @@ const Index = () => {
                 {/* Decorative top border */}
                 <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 rounded-full mb-8"></div>
                 
-                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                  <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent relative">
-                    <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-50 animate-pulse">
-                      SANTHOSH HARI
-                    </span>
-                    <span className="relative drop-shadow-2xl">
-                      SANTHOSH HARI
-                    </span>
+                <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight relative">
+                  {/* Glow effect background layer */}
+                  <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent blur-lg opacity-60 animate-pulse">
+                    SANTHOSH HARI
+                  </span>
+                  {/* Main sharp text layer */}
+                  <span className="relative bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent drop-shadow-2xl">
+                    SANTHOSH HARI
                   </span>
                 </h1>
                 

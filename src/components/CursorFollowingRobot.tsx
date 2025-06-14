@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -92,25 +93,26 @@ const CursorFollowingRobot = () => {
       
       const robotRect = robotRef.current.getBoundingClientRect();
       const robotCenterX = robotRect.left + robotRect.width / 2;
-      const robotCenterY = robotRect.top + 40; // Adjusted for head center position
+      const robotCenterY = robotRect.top + 40; // Head center position
       
       const deltaX = mousePosition.x - robotCenterX;
       const deltaY = mousePosition.y - robotCenterY;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       
       if (distance > 0) {
-        // Improved smooth eye tracking with direct cursor following
-        const maxEyeDistance = 6; // Maximum distance eyes can move from center
+        // Much more responsive and smooth eye tracking
+        const maxEyeDistance = 8; // Maximum distance eyes can move from center
         const angle = Math.atan2(deltaY, deltaX);
         
-        // Calculate the target position based on cursor direction
-        const targetX = Math.cos(angle) * Math.min(distance / 100, maxEyeDistance);
-        const targetY = Math.sin(angle) * Math.min(distance / 100, maxEyeDistance);
+        // Smooth scaling based on distance for natural movement
+        const scaleFactor = Math.min(distance / 200, 1); // Reduced from 100 to 200 for smoother scaling
+        const targetX = Math.cos(angle) * maxEyeDistance * scaleFactor;
+        const targetY = Math.sin(angle) * maxEyeDistance * scaleFactor;
         
-        // Much smoother interpolation for natural movement
+        // Ultra-smooth interpolation with higher responsiveness
         setEyePosition(prev => ({
-          x: prev.x + (targetX - prev.x) * 0.15, // Increased interpolation factor for more responsiveness
-          y: prev.y + (targetY - prev.y) * 0.15
+          x: prev.x + (targetX - prev.x) * 0.25, // Increased from 0.15 to 0.25 for better responsiveness
+          y: prev.y + (targetY - prev.y) * 0.25
         }));
       }
     };
@@ -121,8 +123,8 @@ const CursorFollowingRobot = () => {
       setTimeout(() => setIsBlinking(false), 150);
     }, 3000);
 
-    // Smoother eye tracking with higher frame rate
-    const trackingInterval = setInterval(updateEyePosition, 8); // Increased to ~120fps for smoother movement
+    // High-frequency eye tracking for ultra-smooth movement
+    const trackingInterval = setInterval(updateEyePosition, 5); // Increased to ~200fps for ultra-smooth movement
 
     window.addEventListener('mousemove', updateMousePosition);
 
@@ -179,11 +181,12 @@ const CursorFollowingRobot = () => {
                   <div className="relative w-6 h-6 bg-slate-700 rounded-full overflow-hidden">
                     {!isBlinking ? (
                       <div 
-                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75 ease-out"
+                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full"
                         style={{
                           left: `${4 + eyePosition.x}px`,
                           top: `${4 + eyePosition.y}px`,
                           boxShadow: '0 0 8px rgba(34, 211, 238, 0.8)',
+                          transition: 'none', // Remove CSS transition to let React handle smooth updates
                         }}
                       >
                         {/* Eye highlight */}
@@ -198,11 +201,12 @@ const CursorFollowingRobot = () => {
                   <div className="relative w-6 h-6 bg-slate-700 rounded-full overflow-hidden">
                     {!isBlinking ? (
                       <div 
-                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full transition-all duration-75 ease-out"
+                        className="absolute w-4 h-4 bg-gradient-to-br from-cyan-300 to-cyan-500 rounded-full"
                         style={{
                           left: `${4 + eyePosition.x}px`,
                           top: `${4 + eyePosition.y}px`,
                           boxShadow: '0 0 8px rgba(34, 211, 238, 0.8)',
+                          transition: 'none', // Remove CSS transition to let React handle smooth updates
                         }}
                       >
                         {/* Eye highlight */}

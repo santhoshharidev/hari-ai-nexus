@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,12 +9,16 @@ import MagicalCursor from '@/components/MagicalCursor';
 import CursorFollowingRobot from '@/components/CursorFollowingRobot';
 
 const Index = () => {
+  console.log('Index component is rendering');
+  
   const heroRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
   const servicesRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    console.log('Index component mounted');
+    
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -83,6 +86,8 @@ const Index = () => {
     }
   ];
 
+  console.log('About to render main content');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white overflow-x-hidden">
       <ParticleBackground />
@@ -90,6 +95,7 @@ const Index = () => {
       <CursorFollowingRobot />
       <FloatingNav 
         onNavigate={(section) => {
+          console.log('Navigating to section:', section);
           if (section === 'hero') scrollToSection(heroRef);
           else if (section === 'about') scrollToSection(heroRef);
           else if (section === 'projects') scrollToSection(projectsRef);
@@ -98,12 +104,12 @@ const Index = () => {
         }}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - This should be visible immediately */}
       <section ref={heroRef} className="min-h-screen flex items-center justify-center relative px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Name and Description */}
-            <div className="space-y-8 opacity-0 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+            <div className="space-y-8">
               <div>
                 <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                   <span className="block bg-gradient-to-r from-yellow-400 via-purple-500 to-teal-400 bg-clip-text text-transparent">
@@ -130,13 +136,19 @@ const Index = () => {
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button 
-                  onClick={() => scrollToSection(projectsRef)}
+                  onClick={() => {
+                    console.log('View My Work clicked');
+                    scrollToSection(projectsRef);
+                  }}
                   className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
                 >
                   View My Work
                 </Button>
                 <Button 
-                  onClick={() => scrollToSection(contactRef)}
+                  onClick={() => {
+                    console.log('Let\'s Connect clicked');
+                    scrollToSection(contactRef);
+                  }}
                   variant="outline" 
                   className="border-2 border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-gray-900 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105"
                 >
@@ -146,7 +158,7 @@ const Index = () => {
             </div>
             
             {/* Right Side - Photo */}
-            <div className="relative opacity-0 animate-fade-in" style={{ animationDelay: '0.6s' }}>
+            <div className="relative">
               <div className="relative group">
                 {/* Glowing background effect */}
                 <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 via-purple-600 to-teal-600 rounded-3xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
@@ -157,6 +169,8 @@ const Index = () => {
                     src="/lovable-uploads/6306526b-9949-4fa7-8be0-5b7466535601.png"
                     alt="Santhosh Hari - Web Developer & AI Agent Builder"
                     className="w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
+                    onLoad={() => console.log('Image loaded successfully')}
+                    onError={() => console.log('Image failed to load')}
                   />
                   
                   {/* Floating elements */}
@@ -169,7 +183,7 @@ const Index = () => {
           </div>
           
           {/* Scroll indicator */}
-          <div className="text-center mt-16 opacity-0 animate-fade-in" style={{ animationDelay: '1s' }}>
+          <div className="text-center mt-16">
             <ArrowDown className="h-8 w-8 text-blue-400 animate-bounce cursor-pointer mx-auto" onClick={() => scrollToSection(projectsRef)} />
           </div>
         </div>

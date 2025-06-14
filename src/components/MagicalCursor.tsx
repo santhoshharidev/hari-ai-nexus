@@ -6,24 +6,35 @@ const MagicalCursor = () => {
   const trailRef = useRef<HTMLDivElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const smoothPosition = useRef({ x: 0, y: 0 });
+  const animationId = useRef<number>();
 
   useEffect(() => {
     const updateMousePosition = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      if (cursorRef.current) {
-        cursorRef.current.style.left = `${e.clientX}px`;
-        cursorRef.current.style.top = `${e.clientY}px`;
-      }
-      
-      if (trailRef.current) {
-        trailRef.current.style.left = `${e.clientX}px`;
-        trailRef.current.style.top = `${e.clientY}px`;
-      }
     };
 
     const handleMouseEnter = () => setIsHovering(true);
     const handleMouseLeave = () => setIsHovering(false);
+
+    // Smooth cursor animation
+    const animateCursor = () => {
+      if (cursorRef.current && trailRef.current) {
+        // Smooth interpolation for main cursor
+        smoothPosition.current.x += (mousePosition.x - smoothPosition.current.x) * 0.15;
+        smoothPosition.current.y += (mousePosition.y - smoothPosition.current.y) * 0.15;
+
+        cursorRef.current.style.transform = `translate(${smoothPosition.current.x - 10}px, ${smoothPosition.current.y - 10}px)`;
+        
+        // Trail follows with more delay
+        const trailX = smoothPosition.current.x + (mousePosition.x - smoothPosition.current.x) * 0.05;
+        const trailY = smoothPosition.current.y + (mousePosition.y - smoothPosition.current.y) * 0.05;
+        
+        trailRef.current.style.transform = `translate(${trailX - 20}px, ${trailY - 20}px)`;
+      }
+      
+      animationId.current = requestAnimationFrame(animateCursor);
+    };
 
     // Add event listeners for interactive elements
     const interactiveElements = document.querySelectorAll('button, a, [role="button"]');
@@ -33,15 +44,19 @@ const MagicalCursor = () => {
     });
 
     window.addEventListener('mousemove', updateMousePosition);
+    animationId.current = requestAnimationFrame(animateCursor);
 
     return () => {
       window.removeEventListener('mousemove', updateMousePosition);
+      if (animationId.current) {
+        cancelAnimationFrame(animationId.current);
+      }
       interactiveElements.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
-  }, []);
+  }, [mousePosition.x, mousePosition.y]);
 
   return (
     <>
@@ -63,7 +78,6 @@ const MagicalCursor = () => {
           height: '40px',
           background: 'radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 40%, transparent 70%)',
           borderRadius: '50%',
-          transform: 'translate(-50%, -50%)',
           filter: 'blur(2px)',
         }}
       />
@@ -79,7 +93,6 @@ const MagicalCursor = () => {
           height: '20px',
           background: 'linear-gradient(45deg, #FFD700, #FFA500, #FF6347)',
           borderRadius: '50%',
-          transform: 'translate(-50%, -50%)',
           boxShadow: '0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.3)',
           border: '2px solid rgba(255, 215, 0, 0.6)',
         }}

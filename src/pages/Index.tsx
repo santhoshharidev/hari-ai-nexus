@@ -150,7 +150,7 @@ const Index = () => {
                 {/* Main image container */}
                 <div className="relative bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-2 border border-gray-700/50">
                   <img 
-                    src="/lovable-uploads/6306526b-9949-4fa7-8be0-5b7466535601.png"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
                     alt="Santhosh Hari - Web Developer & AI Agent Builder"
                     className="w-full h-auto rounded-2xl shadow-2xl transform transition-transform duration-500 group-hover:scale-105"
                   />

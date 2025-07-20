@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { ArrowDown, Github, Linkedin, Instagram, Twitter, Mail, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
+import { ArrowDown, Github, Linkedin, Instagram, Twitter, Youtube, Code, Bot, Zap, Globe, MessageCircle, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import ParticleBackground from '@/components/ParticleBackground';
@@ -326,11 +326,11 @@ const Index = () => {
             </Button>
             
             <Button 
-              onClick={() => window.open('mailto:santhoshhari.tech@gmail.com', '_blank')}
+              onClick={() => window.open('https://youtube.com/@santhosh_hari?si=0For4vy80MMnR_RO', '_blank')}
               className="bg-red-600 hover:bg-red-700 text-white p-6 rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 sm:col-span-2 lg:col-span-1"
             >
-              <Mail className="mr-3 h-6 w-6" />
-              Email Me
+              <Youtube className="mr-3 h-6 w-6" />
+              YouTube
             </Button>
           </div>
         </div>
